@@ -43,3 +43,4 @@ for c, i in zip(matriz, organizada):
         pos_1 += 1
 print(constante)
 for i in trocas: print(i)
+input()
