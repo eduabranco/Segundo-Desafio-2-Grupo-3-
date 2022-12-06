@@ -1,7 +1,43 @@
+n=0
+lista=[]
+def quick_sort(a, ini=0, fim=None):
+    fim = fim if fim is not None else len(a)
+    if ini < fim:
+        pp = particao(a, ini, fim)
+        quick_sort(a, ini, pp)
+        quick_sort(a, pp + 1, fim)
+    return a
+
+def particao(a, ini, fim):
+    global n , lista
+    pivo = a[fim - 1]
+    for i in range(ini, fim):
+        if a[i] > pivo:
+            fim += 1
+        else:
+            fim += 1
+            ini += 1
+            a[i], a[ini - 1] = a[ini - 1], a[i]
+            if i!=ini-1:
+                n+=1
+                lista.append(f"L {ini} {i+1} ")
+    return ini - 1
+
+def transp(x):
+    global matriz
+    for l in matriz:
+        linha=[]
+        for c in matriz:
+            linha.append
+
+
+
 tamanho = str(input('Digite a quantidade de linhas e colunas: ')).split()
 linha = int(tamanho[0])
 coluna = int(tamanho[1])
+
 matriz = []
+
 if 1 <= linha <= 200 and 1 <= coluna <= 200 and len(tamanho)==2:
     for l in range(linha):
         matriz.append([])
@@ -12,40 +48,11 @@ if 1 <= linha <= 200 and 1 <= coluna <= 200 and len(tamanho)==2:
 else:
     print('Valor inválido. Encerrando...')
     exit()
-constante = 0
-trocas = []
-tam = len(matriz)
-while tam > 0:
-    i = 0
-    while i < tam - 1:
-        if matriz[i] > matriz[i + 1]:
-            constante += 1
-            trocas.append(f'L {i+1} {i+2}')
-            var = matriz[i]
-            matriz[i] = matriz[i+1]
-            matriz[i+1] = var
-        i+=1
-    tam -= 1
-organizada = []
 print(matriz)
-for pos, valor in enumerate(matriz):
-    organizada.append([])
-    for pos_1, valor_1 in enumerate(valor):
-        ponto = ((pos)*len(valor))+pos_1
-        organizada[pos].append(ponto+1)
-for c, i in zip(matriz, organizada):
-    pos_1 = 0
-    for j, k in zip(c, i):
-        if j!= k:
-            for pos_2, valor in enumerate(c):
-                if valor == k:
-                    constante += 1
-                    trocas.append(f'C {pos_1 + 1} {pos_2 + 1}')
-                    for g in range(len(matriz)):
-                        matriz[g][pos_1] = k
-                        matriz[g][pos_2] = j
-        pos_1 += 1
-print(constante)
-print(matriz)
-for i in trocas: print(i)
-input()
+quick_sort(matriz)
+print(n)
+
+quick_sort()
+for i in lista:
+    print(i)
+print(quick_sort(matriz))
