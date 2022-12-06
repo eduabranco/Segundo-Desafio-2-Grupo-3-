@@ -23,12 +23,13 @@ def particao(a, ini, fim):
                 lista.append(f"L {ini} {i+1} ")
     return ini - 1
 
-def transp(x):
-    global matriz
-    for l in matriz:
+def transpor(matriz, transposta):
+    for l in range(len(matriz[0])):
         linha=[]
-        for c in matriz:
-            linha.append
+        for c in range(len(matriz)):
+            linha.append(matriz[l][c])
+        transposta.append(linha)
+        
 
 
 
@@ -36,7 +37,7 @@ tamanho = str(input('Digite a quantidade de linhas e colunas: ')).split()
 linha = int(tamanho[0])
 coluna = int(tamanho[1])
 
-matriz = []
+transposta=matriz = []
 
 if 1 <= linha <= 200 and 1 <= coluna <= 200 and len(tamanho)==2:
     for l in range(linha):
@@ -51,8 +52,8 @@ else:
 print(matriz)
 quick_sort(matriz)
 print(n)
-
-quick_sort()
+transpor(matriz, transposta)
+quick_sort(transposta)
 for i in lista:
     print(i)
 print(quick_sort(matriz))
