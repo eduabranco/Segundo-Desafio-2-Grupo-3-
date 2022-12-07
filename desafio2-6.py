@@ -66,15 +66,18 @@ transpor(matriz,transposta)
 mode="L"
 organizar_matriz(transposta)
 
+
 matriz=[]
 transpor(transposta,matriz)
 
-print(len(lista))
 
+print(len(lista))
 for i in lista:
     print(i)
 
+    
 for l in matriz:
     print(l)
+    
     
 input()
