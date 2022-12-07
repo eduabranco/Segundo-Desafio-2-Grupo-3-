@@ -1,7 +1,10 @@
 number_times=0
-lista=[]
-transposta=[]
 matriz= []
+transposta=[]
+lista=[]
+
+
+
 def organizar_matriz(matriz):
     global number_times 
     number_times=0
@@ -31,6 +34,7 @@ def particao(a, ini, fim):
                 lista.append(f"{mode} {ini} {i+1} ")
     return ini - 1
     
+    
 def transpor(mtx1,mtx2):
     for i in range(len(mtx1[0])):
         coluna=[]
@@ -38,6 +42,8 @@ def transpor(mtx1,mtx2):
             coluna.append(mtx1[j][i])
         mtx2.append(coluna)
 
+        
+        
 tamanho = str(input('Digite a quantidade de linhas e colunas: ')).split()
 linha = int(tamanho[0])
 coluna = int(tamanho[1])
@@ -70,4 +76,5 @@ for i in lista:
 
 for l in matriz:
     print(l)
+    
 input()
