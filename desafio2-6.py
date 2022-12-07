@@ -62,7 +62,7 @@ organizar_matriz(transposta)
 
 print(len(lista))
 
-for l in matriz:
+for l in lista:
     print(l)
     
 input()
