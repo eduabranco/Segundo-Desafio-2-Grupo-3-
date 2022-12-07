@@ -1,15 +1,24 @@
-n=0
+number_times=0
 lista=[]
-def quick_sort(a, ini=0, fim=None):
+transposta=[]
+matriz= []
+def organizar_matriz(matriz):
+    global number_times 
+    number_times=0
+    for j in matriz:
+        quicksort(j)
+        number_times+=1
+
+def quicksort(a, ini=0, fim=None):
     fim = fim if fim is not None else len(a)
     if ini < fim:
         pp = particao(a, ini, fim)
-        quick_sort(a, ini, pp)
-        quick_sort(a, pp + 1, fim)
+        quicksort(a, ini, pp)
+        quicksort(a, pp + 1, fim)
     return a
 
 def particao(a, ini, fim):
-    global n , lista
+    global mode , lista, number_times
     pivo = a[fim - 1]
     for i in range(ini, fim):
         if a[i] > pivo:
@@ -18,26 +27,20 @@ def particao(a, ini, fim):
             fim += 1
             ini += 1
             a[i], a[ini - 1] = a[ini - 1], a[i]
-            if i!=ini-1:
-                n+=1
-                lista.append(f"L {ini} {i+1} ")
+            if i!=ini-1 and number_times==0:
+                lista.append(f"{mode} {ini} {i+1} ")
     return ini - 1
-
-def transpor(matriz, transposta):
-    for l in range(len(matriz[0])):
-        linha=[]
-        for c in range(len(matriz)):
-            linha.append(matriz[l][c])
-        transposta.append(linha)
-        
-
-
+    
+def transpor(mtx1,mtx2):
+    for i in range(len(mtx1[0])):
+        coluna=[]
+        for j in range(len(mtx1)):
+            coluna.append(mtx1[j][i])
+        mtx2.append(coluna)
 
 tamanho = str(input('Digite a quantidade de linhas e colunas: ')).split()
 linha = int(tamanho[0])
 coluna = int(tamanho[1])
-
-transposta=matriz = []
 
 if 1 <= linha <= 200 and 1 <= coluna <= 200 and len(tamanho)==2:
     for l in range(linha):
@@ -49,11 +52,22 @@ if 1 <= linha <= 200 and 1 <= coluna <= 200 and len(tamanho)==2:
 else:
     print('Valor inválido. Encerrando...')
     exit()
-print(matriz)
-quick_sort(matriz)
-print(n)
-transpor(matriz, transposta)
-quick_sort(transposta)
+
+mode="C"
+organizar_matriz(matriz)
+transpor(matriz,transposta)
+
+mode="L"
+organizar_matriz(transposta)
+
+matriz=[]
+transpor(transposta,matriz)
+
+print(len(lista))
+
 for i in lista:
     print(i)
-print(quick_sort(matriz))
+
+for l in matriz:
+    print(l)
+input()
