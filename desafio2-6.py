@@ -1,7 +1,47 @@
+number_times=0
+lista=[]
+transposta=[]
+matriz= []
+
+def organizar_matriz(matriz):
+    global number_times 
+    number_times=0
+    for j in matriz:
+        quicksort(j)
+        number_times+=1
+
+def quicksort(linha, ini=0, fim=None):
+    fim = fim if fim is not None else len(linha)
+    if ini < fim:
+        pp = particao(linha, ini, fim)
+        quicksort(linha, ini, pp)
+        quicksort(linha, pp + 1, fim)
+    return linha
+
+def particao(linha, ini, fim):
+    global mode , lista, number_times
+    pivo = linha[fim - 1]
+    for i in range(ini, fim):
+        if linha[i] > pivo:
+            fim += 1
+        else:
+            fim += 1
+            ini += 1
+            linha[i], linha[ini - 1] = linha[ini - 1], linha[i]
+            if i!=ini-1 and number_times==0: lista.append(f"{mode} {ini} {i+1} ")
+    return ini - 1
+    
+def transpor(mtx1,mtx2):
+    for i in range(len(mtx1[0])):
+        coluna=[]
+        for j in range(len(mtx1)):
+            coluna.append(mtx1[j][i])
+        mtx2.append(coluna)
+
 tamanho = str(input('Digite a quantidade de linhas e colunas: ')).split()
 linha = int(tamanho[0])
 coluna = int(tamanho[1])
-matriz = []
+
 if 1 <= linha <= 200 and 1 <= coluna <= 200 and len(tamanho)==2:
     for l in range(linha):
         matriz.append([])
@@ -12,40 +52,17 @@ if 1 <= linha <= 200 and 1 <= coluna <= 200 and len(tamanho)==2:
 else:
     print('Valor inválido. Encerrando...')
     exit()
-constante = 0
-trocas = []
-tam = len(matriz)
-while tam > 0:
-    i = 0
-    while i < tam - 1:
-        if matriz[i] > matriz[i + 1]:
-            constante += 1
-            trocas.append(f'L {i+1} {i+2}')
-            var = matriz[i]
-            matriz[i] = matriz[i+1]
-            matriz[i+1] = var
-        i+=1
-    tam -= 1
-organizada = []
-print(matriz)
-for pos, valor in enumerate(matriz):
-    organizada.append([])
-    for pos_1, valor_1 in enumerate(valor):
-        ponto = ((pos)*len(valor))+pos_1
-        organizada[pos].append(ponto+1)
-for c, i in zip(matriz, organizada):
-    pos_1 = 0
-    for j, k in zip(c, i):
-        if j!= k:
-            for pos_2, valor in enumerate(c):
-                if valor == k:
-                    constante += 1
-                    trocas.append(f'C {pos_1 + 1} {pos_2 + 1}')
-                    for g in range(len(matriz)):
-                        matriz[g][pos_1] = k
-                        matriz[g][pos_2] = j
-        pos_1 += 1
-print(constante)
-print(matriz)
-for i in trocas: print(i)
+
+mode="C"
+organizar_matriz(matriz)
+transpor(matriz,transposta)
+
+mode="L"
+organizar_matriz(transposta)
+
+print(len(lista))
+
+for l in matriz:
+    print(l)
+    
 input()
