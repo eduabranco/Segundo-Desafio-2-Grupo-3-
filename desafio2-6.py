@@ -1,9 +1,7 @@
 number_times=0
-matriz= []
-transposta=[]
 lista=[]
-
-
+transposta=[]
+matriz= []
 
 def organizar_matriz(matriz):
     global number_times 
@@ -12,28 +10,26 @@ def organizar_matriz(matriz):
         quicksort(j)
         number_times+=1
 
-def quicksort(a, ini=0, fim=None):
-    fim = fim if fim is not None else len(a)
+def quicksort(linha, ini=0, fim=None):
+    fim = fim if fim is not None else len(linha)
     if ini < fim:
-        pp = particao(a, ini, fim)
-        quicksort(a, ini, pp)
-        quicksort(a, pp + 1, fim)
-    return a
+        pp = particao(linha, ini, fim)
+        quicksort(linha, ini, pp)
+        quicksort(linha, pp + 1, fim)
+    return linha
 
-def particao(a, ini, fim):
+def particao(linha, ini, fim):
     global mode , lista, number_times
-    pivo = a[fim - 1]
+    pivo = linha[fim - 1]
     for i in range(ini, fim):
-        if a[i] > pivo:
+        if linha[i] > pivo:
             fim += 1
         else:
             fim += 1
             ini += 1
-            a[i], a[ini - 1] = a[ini - 1], a[i]
-            if i!=ini-1 and number_times==0:
-                lista.append(f"{mode} {ini} {i+1} ")
+            linha[i], linha[ini - 1] = linha[ini - 1], linha[i]
+            if i!=ini-1 and number_times==0: lista.append(f"{mode} {ini} {i+1} ")
     return ini - 1
-    
     
 def transpor(mtx1,mtx2):
     for i in range(len(mtx1[0])):
@@ -42,8 +38,6 @@ def transpor(mtx1,mtx2):
             coluna.append(mtx1[j][i])
         mtx2.append(coluna)
 
-        
-        
 tamanho = str(input('Digite a quantidade de linhas e colunas: ')).split()
 linha = int(tamanho[0])
 coluna = int(tamanho[1])
@@ -72,12 +66,13 @@ transpor(transposta,matriz)
 
 
 print(len(lista))
+
+
 for i in lista:
     print(i)
 
-    
+
 for l in matriz:
     print(l)
-    
-    
+
 input()
