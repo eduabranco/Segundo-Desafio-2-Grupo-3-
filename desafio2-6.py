@@ -1,7 +1,7 @@
 number_times=0
-lista=[]
-transposta=[]
 matriz= []
+transposta=[]
+lista=[]
 
 def organizar_matriz(matriz):
     global number_times 
@@ -38,20 +38,32 @@ def transpor(mtx1,mtx2):
             coluna.append(mtx1[j][i])
         mtx2.append(coluna)
 
-tamanho = str(input('Digite a quantidade de linhas e colunas: ')).split()
-linha = int(tamanho[0])
-coluna = int(tamanho[1])
+while True:
+    try:
+        tamanho = str(input('Digite a quantidade de linhas e colunas: ')).split()
+        if len(tamanho)==2:
+            linha = int(tamanho[0])
+            coluna = int(tamanho[1])
+            if 1 <= linha <= 200 and 1 <= coluna <= 200:break
+        print('Valor inválido. Tente novamente.\n')
+    except ValueError: print('Valor inválido. Tente novamente.\n')
 
-if 1 <= linha <= 200 and 1 <= coluna <= 200 and len(tamanho)==2:
-    for l in range(linha):
-        matriz.append([])
-        valor = str(input(f'Como estão organizadas as fileiras da linha {l+1}º: ')).split()
-        for c in valor:
-            c = int(c)
-            matriz[l].append(c)
-else:
-    print('Valor inválido. Encerrando...')
-    exit()
+while True:
+    try:
+        for l in range(linha):
+            matriz.append([])
+            while True:
+                try:
+                    valor = str(input(f'Como estão organizadas as fileiras da linha {l+1}º: ')).split()
+                    
+                    if len(valor)==coluna:break
+                    else:print('Valor inválido. Tente novamente.\n')
+                except ValueError: print('Valor inválido. Tente novamente.\n')
+            for c in valor:
+                c = int(c)
+                matriz[l].append(c)
+        break
+    except ValueError: print('Valor inválido. Tente novamente.\n')
 
 mode="C"
 organizar_matriz(matriz)
@@ -62,7 +74,9 @@ organizar_matriz(transposta)
 
 print(len(lista))
 
-for l in lista:
-    print(l)
+
+for i in lista:
+    print(i)
+
+input('\n[ENTER<--]')
     
-input()
